@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bm-bg: #FFFFE7;
+    --bm-text: #163C34;
+    --bm-card: #FFFFFF;
+    --bm-card-hover: #F5F5DC;
+    --bm-border: rgba(22, 60, 52, 0.15);
+    --bm-muted: rgba(22, 60, 52, 0.65);
+
+    --background: 60 100% 96%;
+    --foreground: 165 50% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 165 50% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 165 50% 15%;
+    --primary: 165 50% 15%;
+    --primary-foreground: 60 100% 96%;
+    --secondary: 60 100% 94%;
+    --secondary-foreground: 165 50% 15%;
+    --muted: 60 100% 94%;
+    --muted-foreground: 165 50% 35%;
+    --accent: 60 100% 94%;
+    --accent-foreground: 165 50% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 165 50% 85%;
+    --input: 165 50% 85%;
+    --ring: 165 50% 15%;
+    --radius: 0.5rem;
+  }
+
+  [data-theme="dark"] {
+    --bm-bg: #163C34;
+    --bm-text: #FFFFE7;
+    --bm-card: #1a4439;
+    --bm-card-hover: #1f4d40;
+    --bm-border: rgba(255, 255, 231, 0.15);
+    --bm-muted: rgba(255, 255, 231, 0.75);
+
+    --background: 165 50% 15%;
+    --foreground: 60 100% 96%;
+    --card: 165 45% 18%;
+    --card-foreground: 60 100% 96%;
+    --popover: 165 45% 18%;
+    --popover-foreground: 60 100% 96%;
+    --primary: 60 100% 96%;
+    --primary-foreground: 165 50% 15%;
+    --secondary: 165 45% 22%;
+    --secondary-foreground: 60 100% 96%;
+    --muted: 165 45% 22%;
+    --muted-foreground: 60 100% 80%;
+    --accent: 165 45% 22%;
+    --accent-foreground: 60 100% 96%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 100% 96%;
+    --border: 165 45% 22%;
+    --input: 165 45% 22%;
+    --ring: 60 100% 80%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  /* Fix sticky header overlap on anchor navigation */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-33.333333%);
+    }
+  }
+}
