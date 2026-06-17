@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, Handshake, Shield } from 'lucide-react';
+import { ArrowRight, Handshake, Shield, Coins } from 'lucide-react';
 import ScrollAnimate from '@/components/scroll-animate';
 import { useLang } from '@/lib/lang-context';
 import { Button } from '@/components/ui/button';
@@ -43,12 +43,11 @@ export default function DirectionsSection() {
             </div>
           </ScrollAnimate>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Major block: Special Situations */}
             <ScrollAnimate delay={100} className="h-full">
               <div 
-                onClick={() => setIsSpecialOpen(true)}
-                className="group h-full bg-card/95 border border-primary/20 rounded-3xl p-8 md:p-10 flex flex-col justify-between transition-all duration-300 hover:border-primary/45 hover:shadow-2xl hover:scale-[1.01] cursor-pointer"
+                className="h-full bg-card/95 border border-primary/20 rounded-3xl p-8 md:p-10 flex flex-col justify-between transition-all duration-300"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -59,16 +58,36 @@ export default function DirectionsSection() {
                       <Shield className="w-5 h-5 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-semibold text-card-foreground mb-4 group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-card-foreground mb-4">
                     {t('architecture.major.title')}
                   </h3>
                   <p className="text-base md:text-lg leading-relaxed font-light text-muted-foreground">
                     {t('architecture.major.desc')}
                   </p>
                 </div>
-                <div className="mt-8 flex items-center gap-2 text-primary font-semibold group-hover:translate-x-1 transition-transform">
-                  <span>{t('directions.applyButton')}</span>
-                  <ArrowRight className="w-4 h-4" />
+              </div>
+            </ScrollAnimate>
+
+            {/* Minor block: Liquidity Management */}
+            <ScrollAnimate delay={200} className="h-full">
+              <div 
+                className="h-full bg-card/95 border border-primary/20 rounded-3xl p-8 md:p-10 flex flex-col justify-between transition-all duration-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="px-4 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                      {t('architecture.minor.tag')}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Coins className="w-5 h-5 text-primary" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-semibold text-card-foreground mb-4">
+                    {t('architecture.minor.title')}
+                  </h3>
+                  <p className="text-base md:text-lg leading-relaxed font-light text-muted-foreground">
+                    {t('architecture.minor.desc')}
+                  </p>
                 </div>
               </div>
             </ScrollAnimate>
