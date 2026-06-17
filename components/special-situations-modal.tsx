@@ -20,6 +20,7 @@ interface FormData {
   fullName: string;
   phone: string;
   applicantEmail: string;
+  telegram: string;
   dataConfirmed: boolean;
   hasAuthority: boolean;
   consentPersonalData: boolean;
@@ -51,6 +52,7 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
     fullName: '',
     phone: '',
     applicantEmail: '',
+    telegram: '',
     dataConfirmed: false,
     hasAuthority: false,
     consentPersonalData: false,
@@ -107,6 +109,7 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
           full_name: formData.fullName,
           phone: formData.phone,
           applicant_email: formData.applicantEmail,
+          telegram: formData.telegram,
           data_confirmed: formData.dataConfirmed,
           has_authority: formData.hasAuthority,
           consent_personal_data: formData.consentPersonalData,
@@ -387,7 +390,7 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
 
                   <div className="pt-3 border-t border-border space-y-3">
                     <p className="text-[10px] text-muted-foreground">{t('applicationForm.contactDetailsSectionNote')}</p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <input
                           type="text"
@@ -412,6 +415,15 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
                           value={formData.applicantEmail}
                           onChange={e => update('applicantEmail', e.target.value)}
                           placeholder={t('applicationForm.applicantEmail')}
+                          className={inputClass}
+                        />
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          value={formData.telegram}
+                          onChange={e => update('telegram', e.target.value)}
+                          placeholder={t('applicationForm.telegram')}
                           className={inputClass}
                         />
                       </div>

@@ -9,8 +9,10 @@ interface FormData {
   fullName: string;
   phone: string;
   email: string;
+  telegram: string;
   capital: string;
   consentPersonalData: boolean;
+  consentAgreement: boolean;
 }
 
 interface InvestorModalProps {
@@ -23,13 +25,16 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [showAgreementModal, setShowAgreementModal] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
     email: '',
+    telegram: '',
     capital: '',
     consentPersonalData: false,
+    consentAgreement: false,
   });
 
   if (!isOpen) return null;
@@ -41,7 +46,14 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
   };
 
   const isFormValid = () => {
-    return formData.fullName && formData.phone && formData.email && formData.capital && formData.consentPersonalData;
+    return (
+      formData.fullName &&
+      formData.phone &&
+      formData.email &&
+      formData.capital &&
+      formData.consentPersonalData &&
+      formData.consentAgreement
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -55,7 +67,7 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
       const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-      const formattedMessage = `Заявка от инвестора.\nТелефон: ${formData.phone}\nНаличие свободного капитала: ${formData.capital}`;
+      const formattedMessage = `Заявка от инвестора.\nТелефон: ${formData.phone}\nTelegram: ${formData.telegram}\nНаличие свободного капитала: ${formData.capital}`;
 
       const res = await fetch(`${supabaseUrl}/functions/v1/contact-form`, {
         method: 'POST',
@@ -174,6 +186,19 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
 
               <div>
                 <label className="block text-xs font-semibold text-card-foreground mb-1.5">
+                  {t('investorForm.telegram')}
+                </label>
+                <input
+                  type="text"
+                  value={formData.telegram}
+                  onChange={e => update('telegram', e.target.value)}
+                  placeholder={t('investorForm.telegramPlaceholder')}
+                  className={inputClass}
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-card-foreground mb-1.5">
                   {t('investorForm.capital')} *
                 </label>
                 <select
@@ -189,7 +214,7 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
                 </select>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
                 <div
                   onClick={() => update('consentPersonalData', !formData.consentPersonalData)}
                   className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
@@ -203,8 +228,37 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
                   }`}>
                     {formData.consentPersonalData && <Check className="w-2.5 h-2.5 text-primary-foreground" />}
                   </div>
-                  <span className="text-xs text-card-foreground leading-relaxed">
+                  <span className="text-xs text-card-foreground leading-relaxed select-none">
                     {t('investorForm.confirmPersonalData')}
+                  </span>
+                </div>
+
+                <div
+                  onClick={() => update('consentAgreement', !formData.consentAgreement)}
+                  className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
+                    formData.consentAgreement
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/20'
+                  }`}
+                >
+                  <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                    formData.consentAgreement ? 'border-primary bg-primary' : 'border-muted-foreground/30'
+                  }`}>
+                    {formData.consentAgreement && <Check className="w-2.5 h-2.5 text-primary-foreground" />}
+                  </div>
+                  <span className="text-xs text-card-foreground leading-relaxed select-none">
+                    {t('investorForm.confirmAgreement').split(t('investorForm.agreementLinkText'))[0]}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowAgreementModal(true);
+                      }}
+                      className="underline text-primary hover:opacity-80 transition-opacity font-medium"
+                    >
+                      {t('investorForm.agreementLinkText')}
+                    </button>
+                    {t('investorForm.confirmAgreement').split(t('investorForm.agreementLinkText'))[1]}
                   </span>
                 </div>
               </div>
@@ -238,6 +292,38 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
           )}
         </div>
       </div>
+
+      {/* Nested Agreement Modal */}
+      {showAgreementModal && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-card border border-border w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in-50 zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-5 border-b border-border bg-card">
+              <h3 className="text-lg font-semibold text-card-foreground">
+                {t('investorForm.agreementTitle')}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowAgreementModal(false)}
+                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-6 text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+              {t('investorForm.agreementText')}
+            </div>
+            <div className="p-4 border-t border-border flex justify-end bg-card">
+              <Button
+                type="button"
+                className="rounded-full px-6 py-1.5 bg-primary text-primary-foreground hover:bg-primary/90 text-sm"
+                onClick={() => setShowAgreementModal(false)}
+              >
+                {t('applicationForm.back')}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

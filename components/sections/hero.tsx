@@ -17,7 +17,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate min-h-[calc(100vh-80px)] md:min-h-screen flex md:items-center pt-24 md:pt-20 overflow-hidden"
+      className="relative isolate min-h-[50vh] md:min-h-[65vh] flex items-center pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
       style={{ backgroundColor: '#163C34' }}
     >
       {/* Background Image - High Priority Loading */}
@@ -41,9 +41,9 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-[3] hidden dark:block bg-gradient-to-b from-[rgba(22,60,52,0.95)] via-[#163C34]/60 to-transparent pointer-events-none" />
 
       {/* Seamless bottom transition to next section */}
-      <div className="absolute left-0 right-0 bottom-0 h-[200px] pointer-events-none z-[4] bg-gradient-to-b from-transparent via-[#163C34]/30 to-[#163C34]" />
+      <div className="absolute left-0 right-0 bottom-0 h-[120px] pointer-events-none z-[4] bg-gradient-to-b from-transparent via-[#163C34]/30 to-[#163C34]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 py-12 md:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 py-6 md:py-12">
         <ScrollAnimate>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-[clamp(2rem,7vw,4.5rem)] md:text-7xl font-bold md:font-light mb-6 md:mb-8 tracking-[0.12em] md:tracking-[0.18em] leading-[1.15] text-[#163C34] dark:text-[#FFFFE7] whitespace-nowrap">
