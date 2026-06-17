@@ -37,12 +37,67 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
     consentAgreement: false,
   });
 
+  const [emailError, setEmailError] = useState('');
+  const [telegramError, setTelegramError] = useState('');
+
   if (!isOpen) return null;
 
   const capitalOptions = t('investorForm.capitalOptions') as string[] || [];
 
   const update = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const validateEmail = (emailStr: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr.trim());
+  };
+
+  const validateTelegram = (tgStr: string) => {
+    if (!tgStr) return true;
+    const trimmed = tgStr.trim();
+    return trimmed.startsWith('@') || trimmed.includes('t.me/') || trimmed.includes('telegram.me/');
+  };
+
+  const handleEmailBlur = () => {
+    const val = formData.email.trim();
+    if (!val) {
+      setEmailError(t('validation.invalidEmail'));
+    } else if (!validateEmail(val)) {
+      setEmailError(t('validation.invalidEmail'));
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handleEmailChange = (val: string) => {
+    update('email', val);
+    if (emailError && validateEmail(val)) {
+      setEmailError('');
+    }
+  };
+
+  const handleTelegramBlur = () => {
+    const val = formData.telegram.trim();
+    if (val && !val.startsWith('@') && !val.includes('t.me/') && !val.includes('telegram.me/')) {
+      const formatted = `@${val}`;
+      update('telegram', formatted);
+      setTelegramError('');
+    } else if (val) {
+      if (validateTelegram(val)) {
+        setTelegramError('');
+      } else {
+        setTelegramError(t('validation.invalidTelegram'));
+      }
+    } else {
+      setTelegramError('');
+    }
+  };
+
+  const handleTelegramChange = (val: string) => {
+    update('telegram', val);
+    if (telegramError && validateTelegram(val)) {
+      setTelegramError('');
+    }
   };
 
   const isFormValid = () => {
@@ -58,6 +113,27 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    let currentTelegram = formData.telegram.trim();
+    if (currentTelegram && !currentTelegram.startsWith('@') && !currentTelegram.includes('t.me/') && !currentTelegram.includes('telegram.me/')) {
+      currentTelegram = `@${currentTelegram}`;
+      update('telegram', currentTelegram);
+    }
+
+    const isEmailValid = validateEmail(formData.email);
+    const isTelegramValid = validateTelegram(currentTelegram);
+
+    if (!isEmailValid) {
+      setEmailError(t('validation.invalidEmail'));
+    }
+    if (!isTelegramValid) {
+      setTelegramError(t('validation.invalidTelegram'));
+    }
+
+    if (!isEmailValid || !isTelegramValid) {
+      return;
+    }
+
     if (!isFormValid()) return;
 
     setSubmitting(true);
@@ -177,10 +253,16 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
                     type="email"
                     required
                     value={formData.email}
-                    onChange={e => update('email', e.target.value)}
+                    onChange={e => handleEmailChange(e.target.value)}
+                    onBlur={handleEmailBlur}
                     placeholder={t('investorForm.emailPlaceholder')}
-                    className={inputClass}
+                    className={`${inputClass} ${emailError ? 'border-red-500 focus:ring-red-500/30 focus:border-red-500' : ''}`}
                   />
+                  {emailError && (
+                    <p className="text-red-500 text-[10px] mt-1 font-medium animate-in fade-in-50 duration-200">
+                      {emailError}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -191,10 +273,16 @@ export default function InvestorModal({ isOpen, onClose }: InvestorModalProps) {
                 <input
                   type="text"
                   value={formData.telegram}
-                  onChange={e => update('telegram', e.target.value)}
+                  onChange={e => handleTelegramChange(e.target.value)}
+                  onBlur={handleTelegramBlur}
                   placeholder={t('investorForm.telegramPlaceholder')}
-                  className={inputClass}
+                  className={`${inputClass} ${telegramError ? 'border-red-500 focus:ring-red-500/30 focus:border-red-500' : ''}`}
                 />
+                {telegramError && (
+                  <p className="text-red-500 text-[10px] mt-1 font-medium animate-in fade-in-50 duration-200">
+                    {telegramError}
+                  </p>
+                )}
               </div>
 
               <div>

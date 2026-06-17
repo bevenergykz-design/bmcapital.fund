@@ -58,6 +58,9 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
     consentPersonalData: false,
   });
 
+  const [emailError, setEmailError] = useState('');
+  const [telegramError, setTelegramError] = useState('');
+
   if (!isOpen) return null;
 
   const industries = t('applicationForm.industries') as string[] || [];
@@ -70,11 +73,72 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const validateEmail = (emailStr: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr.trim());
+  };
+
+  const validateTelegram = (tgStr: string) => {
+    if (!tgStr) return true;
+    const trimmed = tgStr.trim();
+    return trimmed.startsWith('@') || trimmed.includes('t.me/') || trimmed.includes('telegram.me/');
+  };
+
+  const handleEmailBlur = () => {
+    const val = formData.applicantEmail.trim();
+    if (!val) {
+      setEmailError(t('validation.invalidEmail'));
+    } else if (!validateEmail(val)) {
+      setEmailError(t('validation.invalidEmail'));
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handleEmailChange = (val: string) => {
+    update('applicantEmail', val);
+    if (emailError && validateEmail(val)) {
+      setEmailError('');
+    }
+  };
+
+  const handleTelegramBlur = () => {
+    const val = formData.telegram.trim();
+    if (val && !val.startsWith('@') && !val.includes('t.me/') && !val.includes('telegram.me/')) {
+      const formatted = `@${val}`;
+      update('telegram', formatted);
+      setTelegramError('');
+    } else if (val) {
+      if (validateTelegram(val)) {
+        setTelegramError('');
+      } else {
+        setTelegramError(t('validation.invalidTelegram'));
+      }
+    } else {
+      setTelegramError('');
+    }
+  };
+
+  const handleTelegramChange = (val: string) => {
+    update('telegram', val);
+    if (telegramError && validateTelegram(val)) {
+      setTelegramError('');
+    }
+  };
+
   const canGoNext = () => {
     switch (currentSlide) {
       case 0: return formData.companyName && formData.country && formData.jurisdiction && formData.industry;
       case 1: return formData.role && formData.situationGroup;
-      case 2: return formData.situationDescription && formData.dealSize && formData.urgency && formData.fullName && formData.phone && formData.applicantEmail;
+      case 2: return (
+        formData.situationDescription &&
+        formData.dealSize &&
+        formData.urgency &&
+        formData.fullName &&
+        formData.phone &&
+        formData.applicantEmail &&
+        validateEmail(formData.applicantEmail) &&
+        validateTelegram(formData.telegram)
+      );
       case 3: return formData.dataConfirmed && formData.hasAuthority && formData.consentPersonalData;
       default: return false;
     }
@@ -413,19 +477,31 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
                         <input
                           type="email"
                           value={formData.applicantEmail}
-                          onChange={e => update('applicantEmail', e.target.value)}
+                          onChange={e => handleEmailChange(e.target.value)}
+                          onBlur={handleEmailBlur}
                           placeholder={t('applicationForm.applicantEmail')}
-                          className={inputClass}
+                          className={`${inputClass} ${emailError ? 'border-red-500 focus:ring-red-500/30 focus:border-red-500' : ''}`}
                         />
+                        {emailError && (
+                          <p className="text-red-500 text-[10px] mt-1 font-medium animate-in fade-in-50 duration-200">
+                            {emailError}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <input
                           type="text"
                           value={formData.telegram}
-                          onChange={e => update('telegram', e.target.value)}
+                          onChange={e => handleTelegramChange(e.target.value)}
+                          onBlur={handleTelegramBlur}
                           placeholder={t('applicationForm.telegram')}
-                          className={inputClass}
+                          className={`${inputClass} ${telegramError ? 'border-red-500 focus:ring-red-500/30 focus:border-red-500' : ''}`}
                         />
+                        {telegramError && (
+                          <p className="text-red-500 text-[10px] mt-1 font-medium animate-in fade-in-50 duration-200">
+                            {telegramError}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -491,7 +567,16 @@ export default function SpecialSituationsModal({ isOpen, onClose }: SpecialSitua
             {currentSlide < TOTAL_SLIDES - 1 ? (
               <Button
                 className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
-                onClick={() => setCurrentSlide(prev => prev + 1)}
+                onClick={() => {
+                  if (currentSlide === 2) {
+                    let currentTelegram = formData.telegram.trim();
+                    if (currentTelegram && !currentTelegram.startsWith('@') && !currentTelegram.includes('t.me/') && !currentTelegram.includes('telegram.me/')) {
+                      currentTelegram = `@${currentTelegram}`;
+                      update('telegram', currentTelegram);
+                    }
+                  }
+                  setCurrentSlide(prev => prev + 1);
+                }}
                 disabled={!canGoNext()}
               >
                 {t('applicationForm.next')}

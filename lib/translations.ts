@@ -367,7 +367,9 @@ export const translations = {
       "capital": "Наличие свободного капитала",
       "capitalPlaceholder": "Выберите диапазон",
       "capitalOptions": [
-            "от $50 000 до $300 000",
+            "от $50 000 до $100 000",
+            "от $100 000 до $200 000",
+            "от $200 000 до $300 000",
             "от $300 000 до $500 000",
             "от $500 000 до $1 000 000",
             "от $1 000 000 до $3 000 000",
@@ -506,7 +508,11 @@ export const translations = {
                   "content": "По любым вопросам об использовании сайта: info@bmcapital.fund."
             }
       ]
-},
+    },
+    validation: {
+      "invalidEmail": "Введите корректный email",
+      "invalidTelegram": "Telegram должен начинаться с @ или быть ссылкой t.me/"
+    }
   },
   en: {
     nav: {
@@ -874,7 +880,9 @@ export const translations = {
       "capital": "Available Free Capital",
       "capitalPlaceholder": "Select a range",
       "capitalOptions": [
-            "from $50,000 to $300,000",
+            "from $50,000 to $100,000",
+            "from $100,000 to $200,000",
+            "from $200,000 to $300,000",
             "from $300,000 to $500,000",
             "from $500,000 to $1,000,000",
             "from $1,000,000 to $3,000,000",
@@ -1013,7 +1021,11 @@ export const translations = {
                   "content": "For any questions about use of the website: info@bmcapital.fund."
             }
       ]
-},
+    },
+    validation: {
+      "invalidEmail": "Please enter a valid email",
+      "invalidTelegram": "Telegram must start with @ or be a t.me/ link"
+    }
   },
   kz: {
     nav: {
@@ -1381,7 +1393,9 @@ export const translations = {
       "capital": "Бос капиталдың болуы",
       "capitalPlaceholder": "Диапазонды таңдаңыз",
       "capitalOptions": [
-            "$50 000-нан $300 000-ға дейін",
+            "$50 000-нан $100 000-ға дейін",
+            "$100 000-нан $200 000-ға дейін",
+            "$200 000-нан $300 000-ға дейін",
             "$300 000-нан $500 000-ға дейін",
             "$500 000-нан $1 000 000-ға дейін",
             "$1 000 000-нан $3 000 000-ға дейін",
@@ -1520,6 +1534,10 @@ export const translations = {
                   "content": "Сайтты пайдалану бойынша кез келген сұрақтар бойынша: info@bmcapital.fund."
             }
       ]
-},
+    },
+    validation: {
+      "invalidEmail": "Қате email енгізілді",
+      "invalidTelegram": "Telegram @ таңбасынан басталуы немесе t.me/ сілтемесі болуы керек"
+    }
   },
 };
