@@ -198,9 +198,9 @@ export const translations = {
                   "phone": "+7 701 726 92 72"
             },
             {
-                  "role": "Партнёр",
+                  "role": "Управляющий партнер",
                   "name": "Ерик Шиныбеков",
-                  "title": "Партнёр, BM Capital Fund",
+                  "title": "Управляющий партнер, BM Capital Fund",
                   "photo": "/assets/people/erik.jpg",
                   "description": [
                         "Инвестиционный специалист с многолетним опытом в управлении активами и стратегическом развитии. Системный и дисциплинированный подход к управлению капиталом. Приоритет — сохранность капитала, прозрачность и строгий контроль рисков."
@@ -711,9 +711,9 @@ export const translations = {
                   "phone": "+7 701 726 92 72"
             },
             {
-                  "role": "Partner",
+                  "role": "Managing Partner",
                   "name": "Yerik Shinybekov",
-                  "title": "Partner, BM Capital Fund",
+                  "title": "Managing Partner, BM Capital Fund",
                   "photo": "/assets/people/erik.jpg",
                   "description": [
                         "Investment specialist with extensive experience in asset management and strategic development. Systematic and disciplined approach to capital management with long-term strategic focus. Prioritises capital preservation, transparency and strict risk control."
@@ -1224,9 +1224,9 @@ export const translations = {
                   "phone": "+7 701 726 92 72"
             },
             {
-                  "role": "Серіктес",
+                  "role": "Басқарушы серіктес",
                   "name": "Ерік Шиныбеков",
-                  "title": "Серіктес, BM Capital Fund",
+                  "title": "Басқарушы серіктес, BM Capital Fund",
                   "photo": "/assets/people/erik.jpg",
                   "description": [
                         "Активтерді басқару және стратегиялық даму саласындағы көп жылдық тәжірибесі бар инвестициялық маман. Капиталды басқаруға жүйелі және тәртіпті көзқарас. Капиталдың сақталуы, ашықтық және тәуекелдерді қатаң бақылау — басымдықтар."
