@@ -15,10 +15,7 @@ export default function Navigation() {
     { id: 'who', label: t('nav.who') },
     { id: 'architecture', label: t('nav.architecture') },
     { id: 'roles', label: t('nav.roles') },
-    { id: 'filter', label: t('nav.filter') },
-    { id: 'partnership', label: t('nav.partnership') },
     { id: 'team', label: t('nav.team') },
-    { id: 'contact', label: t('nav.contact') },
   ];
 
   useEffect(() => {

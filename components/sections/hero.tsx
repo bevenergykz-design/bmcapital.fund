@@ -45,8 +45,8 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-6 py-12 md:py-20">
         <ScrollAnimate>
-          <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
-            <h1 className="text-[clamp(2rem,7vw,4.5rem)] md:text-7xl font-bold md:font-light mb-4 md:mb-6 tracking-tight md:tracking-normal leading-[1.15] text-[#163C34] dark:text-[#FFFFE7] whitespace-nowrap">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-[clamp(2rem,7vw,4.5rem)] md:text-7xl font-bold md:font-light mb-6 md:mb-8 tracking-[0.12em] md:tracking-[0.18em] leading-[1.15] text-[#163C34] dark:text-[#FFFFE7] whitespace-nowrap">
               BM CAPITAL FUND
             </h1>
 
@@ -55,53 +55,6 @@ export default function HeroSection() {
             </p>
           </div>
         </ScrollAnimate>
-
-        <div className="max-w-5xl mx-auto">
-          {/* MOBILE */}
-          <div className="md:hidden mb-3">
-            <ScrollAnimate delay={0}>
-              <div className="w-full min-h-[136px] rounded-[32px] border border-[rgba(255,255,231,0.18)] bg-[#163C34] p-5 text-center flex flex-col items-center justify-center transition-transform duration-300 hover:scale-[1.02]">
-                <div className="text-2xl font-semibold mb-2 text-[#FFFFFF]">
-                  {facts[0].value}
-                </div>
-                <div className="text-sm font-light text-[#E8E08C]">
-                  {facts[0].label}
-                </div>
-              </div>
-            </ScrollAnimate>
-          </div>
-
-          <div className="md:hidden grid grid-cols-2 gap-3">
-            {facts.slice(1).map((fact, index) => (
-              <ScrollAnimate key={index + 1} delay={100 * (index + 1)}>
-                <div className="w-full h-full min-h-[136px] rounded-[32px] border border-[rgba(255,255,231,0.18)] bg-[#163C34] p-5 text-center flex flex-col items-center justify-center transition-transform duration-300 hover:scale-[1.02]">
-                  <div className="text-2xl font-semibold mb-2 text-[#FFFFFF]">
-                    {fact.value}
-                  </div>
-                  <div className="text-sm font-light text-[#E8E08C]">
-                    {fact.label}
-                  </div>
-                </div>
-              </ScrollAnimate>
-            ))}
-          </div>
-
-          {/* DESKTOP */}
-          <div className="hidden md:grid grid-cols-3 lg:grid-cols-5 gap-4">
-            {facts.map((fact, index) => (
-              <ScrollAnimate key={index} delay={100 * index}>
-                <div className="min-h-[164px] rounded-[32px] border border-[rgba(255,255,231,0.18)] bg-[#163C34] p-6 text-center flex flex-col items-center justify-center transition-transform duration-300 hover:scale-[1.02]">
-                  <div className="text-3xl font-semibold mb-2 text-[#FFFFFF]">
-                    {fact.value}
-                  </div>
-                  <div className="text-sm font-light text-[#E8E08C]">
-                    {fact.label}
-                  </div>
-                </div>
-              </ScrollAnimate>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

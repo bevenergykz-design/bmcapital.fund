@@ -350,7 +350,35 @@ export const translations = {
             "В течение 6 месяцев",
             "Без конкретных сроков"
       ]
-},
+    },
+    investorForm: {
+      "title": "Заявка на инвестиции",
+      "subtitle": "Заполните форму, чтобы получить доступ к сделкам фонда",
+      "fullName": "ФИО",
+      "fullNamePlaceholder": "Введите ваше полное имя",
+      "phone": "Телефон",
+      "phonePlaceholder": "+7 (___) ___-__-__",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "capital": "Наличие свободного капитала",
+      "capitalPlaceholder": "Выберите диапазон",
+      "capitalOptions": [
+            "от $50 000 до $300 000",
+            "от $300 000 до $500 000",
+            "от $500 000 до $1 000 000",
+            "от $1 000 000 до $3 000 000",
+            "от $3 000 000 до $5 000 000",
+            "более $5 000 000"
+      ],
+      "confirmData": "Подтверждаю корректность и актуальность сведений",
+      "confirmPersonalData": "Согласен на обработку персональных данных",
+      "submit": "Отправить",
+      "submitting": "Отправка...",
+      "successTitle": "Заявка отправлена!",
+      "successDescription": "Мы свяжемся с вами в ближайшее время.",
+      "errorTitle": "Ошибка отправки",
+      "errorDescription": "Не удалось отправить заявку. Попробуйте позже."
+    },
     footer: {
       "description": "Профессиональное управление капиталом для долгосрочных инвесторов",
       "rights": "Все права защищены.",
@@ -821,7 +849,35 @@ export const translations = {
             "Within 6 months",
             "No specific timeline"
       ]
-},
+    },
+    investorForm: {
+      "title": "Investor Application",
+      "subtitle": "Fill out the form to get access to the fund's deals",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "phone": "Phone",
+      "phonePlaceholder": "+7 (___) ___-__-__",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "capital": "Available Free Capital",
+      "capitalPlaceholder": "Select a range",
+      "capitalOptions": [
+            "from $50,000 to $300,000",
+            "from $300,000 to $500,000",
+            "from $500,000 to $1,000,000",
+            "from $1,000,000 to $3,000,000",
+            "from $3,000,000 to $5,000,000",
+            "more than $5,000,000"
+      ],
+      "confirmData": "I confirm the correctness and relevance of the information",
+      "confirmPersonalData": "I agree to the processing of personal data",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "successTitle": "Application submitted!",
+      "successDescription": "We will contact you shortly.",
+      "errorTitle": "Submission error",
+      "errorDescription": "Failed to submit the application. Please try again later."
+    },
     footer: {
       "description": "Professional capital management for long-term investors",
       "rights": "All rights reserved.",
@@ -1292,7 +1348,35 @@ export const translations = {
             "6 ай ішінде",
             "Нақты мерзімдер жоқ"
       ]
-},
+    },
+    investorForm: {
+      "title": "Инвестициялауға өтінім",
+      "subtitle": "Қор мәмілелеріне қол жеткізу үшін форманы толтырыңыз",
+      "fullName": "Толық аты-жөні",
+      "fullNamePlaceholder": "Толық атыңызды енгізіңіз",
+      "phone": "Телефон",
+      "phonePlaceholder": "+7 (___) ___-__-__",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "capital": "Бос капиталдың болуы",
+      "capitalPlaceholder": "Диапазонды таңдаңыз",
+      "capitalOptions": [
+            "$50 000-нан $300 000-ға дейін",
+            "$300 000-нан $500 000-ға дейін",
+            "$500 000-нан $1 000 000-ға дейін",
+            "$1 000 000-нан $3 000 000-ға дейін",
+            "$3 000 000-нан $5 000 000-ға дейін",
+            "$5 000 000-нан астам"
+      ],
+      "confirmData": "Мәліметтердің дұрыстығы мен өзектілігін растаймын",
+      "confirmPersonalData": "Жеке деректерді өңдеуге келісемін",
+      "submit": "Жіберу",
+      "submitting": "Жіберілуде...",
+      "successTitle": "Өтінім жіберілді!",
+      "successDescription": "Жақын арада сізбен хабарласамыз.",
+      "errorTitle": "Жіберу қатесі",
+      "errorDescription": "Өтінімді жіберу мүмкін болмады. Кейінірек қайталап көріңіз."
+    },
     footer: {
       "description": "Ұзақ мерзімді инвесторлар үшін капиталды кәсіби басқару",
       "rights": "Барлық құқықтар қорғалған.",
